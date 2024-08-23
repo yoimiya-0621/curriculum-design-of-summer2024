@@ -1,9 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 const int N=1010;
-void menu();//²Ëµ¥
-class Manage;//¹ÜÀíÏµÍ³Àà
-class Train_Ticket{//³µ´Î³µÆ±Àà
+void menu();//èœå•
+class Manage;//ç®¡ç†ç³»ç»Ÿç±»
+class Train_Ticket{//è½¦æ¬¡è½¦ç¥¨ç±»
     public:
     friend class Manage;
         int id;
@@ -17,18 +17,18 @@ class Train_Ticket{//³µ´Î³µÆ±Àà
 };
 class Manage{
     public:
-        void add();//Â¼Èë³µ´Î
-        void show();//ä¯ÀÀ
-        void search();//²éÑ¯
-        void buy_ticket();//¹ºÆ±
-        void refund_ticket();//ÍËÆ±
-        void save();//±£´æµ½ÎÄ¼þ
+        void add();//å½•å…¥è½¦æ¬¡
+        void show();//æµè§ˆ
+        void search();//æŸ¥è¯¢
+        void buy_ticket();//è´­ç¥¨
+        void refund_ticket();//é€€ç¥¨
+        void save();//ä¿å­˜åˆ°æ–‡ä»¶
 };
 int n,cnt=0;
-Train_Ticket t[N];//³µÆ±³µ´Î£¬²»³¬¹ýn£¬ÏÖÓÐcnt¸ö³µ´Î
-Manage p;//¹ÜÀíÏµÍ³µÄ¶ÔÏó£¬ÐèÒª¶ÔÏóÀ´µ÷ÓÃ³ÉÔ±º¯Êý
-int now=time(NULL);//»ñÈ¡µ±Ç°Ê±¼ä
-int now_hour=now%(3600*24)/3600+8;//»»ËãÎªÏÖÔÚµÄÊ±¼ä
+Train_Ticket t[N];//è½¦ç¥¨è½¦æ¬¡ï¼Œä¸è¶…è¿‡nï¼ŒçŽ°æœ‰cntä¸ªè½¦æ¬¡
+Manage p;//ç®¡ç†ç³»ç»Ÿçš„å¯¹è±¡ï¼Œéœ€è¦å¯¹è±¡æ¥è°ƒç”¨æˆå‘˜å‡½æ•°
+int now=time(NULL);//èŽ·å–å½“å‰æ—¶é—´
+int now_hour=now%(3600*24)/3600+8;//æ¢ç®—ä¸ºçŽ°åœ¨çš„æ—¶é—´
 int now_min=now%(3600*24)%3600/60;
 int main()
 {
@@ -38,7 +38,7 @@ int main()
         menu();
         cin>>ty;
         while(ty<1||ty>6){
-            cout<<"ÊäÈë²»ºÏ·¨£¬ÇëÖØÐÂÊäÈë£º";
+            cout<<"è¾“å…¥ä¸åˆæ³•ï¼Œè¯·é‡æ–°è¾“å…¥ï¼š";
             cin>>ty;
         }
         if(ty==1) {
@@ -64,15 +64,15 @@ int main()
 }
 void menu()
 {
-    cout<<"~~~~~~»¶Ó­Ê¹ÓÃ³µÆ±¹ÜÀíÏµÍ³!~~~~~~"<<'\n';
+    cout<<"~~~~~~æ¬¢è¿Žä½¿ç”¨è½¦ç¥¨ç®¡ç†ç³»ç»Ÿ!~~~~~~"<<'\n';
     cout<<"     =====================     "<<'\n';
-    cout<<"        1.Â¼Èë³µÆ±ÐÅÏ¢          "<<'\n';
-    cout<<"        2.ä¯ÀÀ³µÆ±ÐÅÏ¢          "<<'\n';
-    cout<<"        3.²éÑ¯³µÆ±ÐÅÏ¢          "<<'\n';
-    cout<<"        4.ÊÛÆ±                 "<<'\n';
-    cout<<"        5.ÍËÆ±                 "<<'\n';
-    cout<<"        6.ÍË³öÏµÍ³             "<<'\n';
-    cout<<"ÇëÑ¡Ôñ£º";
+    cout<<"        1.å½•å…¥è½¦ç¥¨ä¿¡æ¯          "<<'\n';
+    cout<<"        2.æµè§ˆè½¦ç¥¨ä¿¡æ¯          "<<'\n';
+    cout<<"        3.æŸ¥è¯¢è½¦ç¥¨ä¿¡æ¯          "<<'\n';
+    cout<<"        4.å”®ç¥¨                 "<<'\n';
+    cout<<"        5.é€€ç¥¨                 "<<'\n';
+    cout<<"        6.é€€å‡ºç³»ç»Ÿ             "<<'\n';
+    cout<<"è¯·é€‰æ‹©ï¼š";
 }
 void Manage::save()
 {
@@ -90,7 +90,7 @@ void Manage::save()
     }
 }
 void Manage::add(){
-    cout<<"ÄúÒªÂ¼Èë¼¸¸ö³µ´ÎÐÅÏ¢£º";
+    cout<<"æ‚¨è¦å½•å…¥å‡ ä¸ªè½¦æ¬¡ä¿¡æ¯ï¼š";
     int k;
     char ch;
     cin>>k;
@@ -111,13 +111,13 @@ void Manage::show(){
         cout<<t[i].pass_time<<' '<<t[i].capacity<<' '<<t[i].sailed_ticket;
         if(t[i].depature_time_hour<now_hour||t[i].depature_time_hour==now_hour&&t[i].depature_time_min>now_min)
         {
-            cout<<' '<<"ÒÑ·¢³µ";
+            cout<<' '<<"å·²å‘è½¦";
         }
         cout<<'\n';
     }
 }
 void Manage::search(){
-    cout<<"°´³µ´ÎºÅ²éÑ¯Çë°´1£¬°´ÖÕµãÕ¾²éÑ¯Çë°´2£º";
+    cout<<"æŒ‰è½¦æ¬¡å·æŸ¥è¯¢è¯·æŒ‰1ï¼ŒæŒ‰ç»ˆç‚¹ç«™æŸ¥è¯¢è¯·æŒ‰2ï¼š";
     int ty;
     cin>>ty;
     if(ty==1)
@@ -155,7 +155,7 @@ void Manage::search(){
 void Manage::buy_ticket()
 {
     int id;
-    cout<<"ÇëÑ¡Ôñ¹ºÂòµÄ³µ´Î£º";
+    cout<<"è¯·é€‰æ‹©è´­ä¹°çš„è½¦æ¬¡ï¼š";
     cin>>id;
     for(int i=0;i<cnt;i++)
         {
@@ -163,33 +163,32 @@ void Manage::buy_ticket()
                 if(t[i].sailed_ticket<t[i].capacity&&
                 (now_hour<t[i].depature_time_hour||now_hour==t[i].depature_time_hour&&now_min<t[i].depature_time_min))
                 {
-                    cout<<"¹ºÆ±³É¹¦"<<'\n';
+                    cout<<"è´­ç¥¨æˆåŠŸ"<<'\n';
                     t[i].sailed_ticket+=1;
                 }
                 else if(t[i].sailed_ticket>=t[i].capacity)
-                    cout<<"¹ºÆ±Ê§°Ü£¬ÓàÆ±²»×ã"<<'\n';
+                    cout<<"è´­ç¥¨å¤±è´¥ï¼Œä½™ç¥¨ä¸è¶³"<<'\n';
                 else
-                    cout<<"¹ºÆ±Ê§°Ü£¬¸Ã°à´ÎÒÑ·¢³µ"<<'\n';
-                break;
+                    cout<<"è´­ç¥¨å¤±è´¥ï¼Œè¯¥ç­æ¬¡å·²å‘è½¦"<<'\n';
+            		break;
             }
-            
         }
 }
 void Manage::refund_ticket(){
     int id;
-    cout<<"ÇëÑ¡ÔñÒªÍËÆ±µÄ³µ´Î£º";
+    cout<<"è¯·é€‰æ‹©è¦é€€ç¥¨çš„è½¦æ¬¡ï¼š";
     cin>>id;
     for(int i=0;i<cnt;i++)
         {
             if(t[i].id==id){
                 if(now_hour<t[i].depature_time_hour||now_hour==t[i].depature_time_hour&&now_min<t[i].depature_time_min)
                 {
-                    cout<<"ÍËÆ±³É¹¦"<<'\n';
+                    cout<<"é€€ç¥¨æˆåŠŸ"<<'\n';
                     t[i].sailed_ticket-=1;
                 }
                 else
-                    cout<<"ÍËÆ±Ê§°Ü£¬¸Ã°à´ÎÒÑ·¢³µ"<<'\n';
-                break;
+                    cout<<"é€€ç¥¨å¤±è´¥ï¼Œè¯¥ç­æ¬¡å·²å‘è½¦"<<'\n';
+            		break;
             }
         }
 }
