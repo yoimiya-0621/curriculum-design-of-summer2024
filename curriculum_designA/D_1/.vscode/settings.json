@@ -1,19 +1,8 @@
 {
-    
     "files.associations": {
-        "iostream": "cpp"
-    },
-    "terminal.integrated.fontFamily": "Lucida Console",
-"[cpp]": {
-
-        "files.encoding": "utf8"
-        
-        },
-        
- "[c]": {
-        
-        "files.encoding": "utf8"
-        
-        }
-    
+        "iostream": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "vector": "cpp"
+    }
 }

@@ -7,6 +7,9 @@ void game()
     cout<<"请自行设定用时：";
     ll time_limit;
     cin>>time_limit;
+    cout<<"是否需要提示,如果需要请按1,否则按0"<<'\n';
+    int tips=0;
+    cin>>tips;
     cout<<"在游戏过程中如果想要提示就猜0,如果已经准备好开始游戏请按1，如想退出请按0："<<'\n';
     int flag=0;
     cin>>flag;
@@ -14,6 +17,10 @@ void game()
     {
         start=time(NULL);
         int ans=rand()%10000+1;
+        if(tips==1)
+        {
+            cout<<"个位数字为"<<ans%10<<'\n';
+        }
         int x=0;
         while(1)
         {

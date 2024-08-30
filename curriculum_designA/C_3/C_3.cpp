@@ -1,31 +1,46 @@
 #include <bits/stdc++.h>
+#include <conio.h>
+#include <Windows.h>
 using namespace std;
 const int N=1e3+10;
-char ch;
+char ch;//用于判定玩家行进方向
 char mp[N][N];
-char Map[N][N];
+char Map[N][N];//棋盘
 bool a[N][N];
-int n,cnt=0;
-int dx[4]={0,1,0,-1};
+int n,cnt=0,ans=0,flag=0;
+int dx[4]={0,1,0,-1};//用于判定方向
 int dy[4]={1,0,-1,0};
-map<vector<int>,bool>path;
+map<vector<int>,bool>path;//以下三个都用于生成棋盘
 map<pair<int,int>,pair<int,int>>path2;
 vector<pair<int,int>>past;
-int last_x,last_y,x,y;
-void init()
+int x,y;//玩家坐标
+void menu()//菜单
+{
+    cout<<"   1.开始游戏"<<'\n';
+    cout<<"   0.退出"<<'\n';
+}
+void init()//初始化
 {
     for(int i=1;i<=n;i++)
         for(int j=1;j<=n;j++)
         {
             mp[i][j]=' ';
+            a[i][j]=false;
         }
+    cnt=0,ans=0,flag=0;
+    path.clear(),path2.clear(),past.clear();
+    x=0,y=0;
 }
-void create(int x,int y)
+void create(int x,int y)//生成棋盘
 {
     if(!a[x][y])
     {
         cnt++;
         //cout<<x<<' '<<y<<'\n';
+    }
+    if(x==n&&y==n&&flag==0){
+        ans++;
+        flag=1;
     }
     a[x][y]=true;
     mp[x][y]='*';
@@ -59,7 +74,7 @@ void create(int x,int y)
         create(x+dx[k],y+dy[k]);
     }
 }
-void print()
+void print(int x,int y)//打印棋盘和玩家位置
 {
     // for(int i=1;i<=2*n+1;i++)
     //     cout<<"X";
@@ -125,6 +140,11 @@ void print()
         cout<<'X';
         for(int j=1;j<=2*n-1;j++)
         {
+            if(i==x&&j==y&&Map[i][j]==' ')
+            {
+                cout<<'O';
+                continue;
+            }
             cout<<Map[i][j];
         }
         cout<<'X';
@@ -133,24 +153,100 @@ void print()
     for(int i=1;i<=2*n+1;i++)
         cout<<'X';
 }
-int main()
+void game()
 {
+    int step=0;
     cout<<"请输入迷宫大小n：";
     cin>>n;
     init();
     past.push_back({1,1});
+    if(n%2==0)
+    n++;
+    n=(n+1)/2;
     create(1,1);
     x=1,y=1;
     mp[1][1]='O';
+    print(1,1);
+    vector<pair<int,int>>process;
+    int start=time(NULL);
     while(1)
     {
-        ch=getchar();
+        cin>>ch;
+        step++;
         system("cls");
         if(ch=='w'){
-            //mp[x+dx[0]][y+dy[0]]='O';
+            x-=1;
+            if(Map[x][y]=='X'||x<1||y<1||x>2*n-1||y>2*n-1){
+                print(++x,y);
+                continue;
+            }
         }
-        print();
+        else if(ch=='s'){
+            x+=1;
+            if(Map[x][y]=='X'||x<1||y<1||x>2*n-1||y>2*n-1){
+                print(--x,y);
+                continue;
+            }
+        }
+        else if(ch=='a'){
+            y-=1;
+            if(Map[x][y]=='X'||x<1||y<1||x>2*n-1||y>2*n-1){
+                print(x,++y);
+                continue;
+            }
+        }
+        else if(ch=='d'){
+            y+=1;
+            if(Map[x][y]=='X'||x<1||y<1||x>2*n-1||y>2*n-1){
+                print(x,--y);
+                continue;
+            }
+        }
+        process.push_back({x,y});
+        print(x,y);
+        if(x==2*n-1&&y==2*n-1){
+            int now=time(NULL);
+            //得分与时间与步数有关
+            cout<<"恭喜你到达终点,一共走了"<<cnt<<"步,用时"<<now-start<<"秒,得分为"<<(double)cnt/step*100<<'\n';
+            break;
+        }
     }
-    
+    int ty=0;
+    cout<<"是否查看回放"<<'\n';
+    cout<<"1.  查看"<<'\n';
+    cout<<"0.  不查看"<<"\n";
+    cin>>ty;
+    if(ty==1){
+        system("cls");
+        for(int i=0;i<process.size();i++)
+        {
+            print(process[i].first,process[i].second);
+            Sleep(300);
+            system("cls");
+        }
+    }
+    else
+        return;
+}
+int main()
+{
+    int T;
+    while(1){
+        menu();
+        cin>>T;
+        if(T==1){
+            system("cls");
+            game();
+            cout<<"要继续吗"<<'\n';
+            cout<<"1.  继续"<<'\n';
+            cout<<"0.  退出"<<'\n';
+            cin>>T;
+            if(T==0)
+                break;
+        }
+        else if(T==0)
+            break;
+        system("cls");
+    }
     return 0;
 }

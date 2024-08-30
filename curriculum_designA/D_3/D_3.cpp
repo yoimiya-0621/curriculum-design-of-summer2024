@@ -10,6 +10,7 @@ int n,m,stratld;
 vector<int>ans;
 int main()
 {
+    //cout<<"分别输入n（总人数），strald（开始的人），m（每m个人出队一个人）"<<'\n';
     cin>>n>>stratld>>m;
     stratld%=n;
     Node* first=new Node;//头节点

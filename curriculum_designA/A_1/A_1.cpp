@@ -32,6 +32,7 @@ int now_hour=now%(3600*24)/3600+8;//换算为现在的时间
 int now_min=now%(3600*24)%3600/60;
 int main()
 {
+    cout<<"输入最大的车次数目"<<'\n';
     cin>>n;
     int ty=0;
     while(1){
@@ -59,6 +60,12 @@ int main()
         }
         else 
             break;
+        int ty2;
+        cout<<"是否继续，继续按1，退出按0"<<'\n';
+        cin>>ty2;
+        if(ty2==0)
+            break;
+        system("cls");
     }
     return 0;
 }
@@ -94,6 +101,7 @@ void Manage::add(){
     int k;
     char ch;
     cin>>k;
+    cout<<"请按照车号、起点、终点、发车时间、行车时间、载客量、已售票量的顺序输入"<<'\n';
     for(int i=0;i<k;i++)
     {
         cin>>t[i+cnt].id>>t[i+cnt].start_station>>t[i+cnt].end_station>>
@@ -103,6 +111,7 @@ void Manage::add(){
     cnt+=k;
 }
 void Manage::show(){
+    cout<<"车号、起点、终点、发车时间、行车时间、载客量、已售票量"<<'\n';
     for(int i=0;i<cnt;i++)
     {
         cout<<t[i].id<<' '<<t[i].start_station<<' '<<t[i].end_station<<' ';
