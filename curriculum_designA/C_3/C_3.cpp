@@ -133,25 +133,37 @@ void print(int x,int y)//打印棋盘和玩家位置
     // for(int i=1;i<=2*n+1;i++)
     //     cout<<"X";
     for(int i=1;i<=2*n+1;i++)
-        cout<<'X';
+    {
+        cout<<"■";
+        //cout<<'X';
+    }
     cout<<'\n';
     for(int i=1;i<=2*n-1;i++)
     {
-        cout<<'X';
+        cout<<"■";
+        //cout<<'X';
         for(int j=1;j<=2*n-1;j++)
         {
             if(i==x&&j==y&&Map[i][j]==' ')
             {
-                cout<<'O';
+                cout<<"我";
                 continue;
             }
-            cout<<Map[i][j];
+            if(Map[i][j]=='X')
+            cout<<"■";
+            else
+            cout<<"  ";
+            //cout<<Map[i][j];
         }
-        cout<<'X';
+        cout<<"■";
+        //cout<<'X';
         cout<<'\n';
     }
     for(int i=1;i<=2*n+1;i++)
-        cout<<'X';
+    {
+        cout<<"■";
+        //cout<<'X';
+    }
 }
 void game()
 {
